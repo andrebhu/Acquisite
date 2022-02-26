@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="box">
+        <form method="post">
+            <input type="text" name="name" value={{ business.name }} required>
+            <input type="text" name="description" value={{ business.description }} required>
+            <input type="submit">
+        </form>
+    </div>
+{% endblock %}

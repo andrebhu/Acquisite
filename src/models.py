@@ -29,16 +29,17 @@ class Business(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), nullable=False)
 
+    description = db.Column(db.String(128), nullable=False)
+
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    # Additional features in the future
+    # posts
     # location = db.Column(db.String(128), nullable=False)
     # industry = db.Column(db.String(128), nullable=False)
     # size = db.Column(db.Integer)
-    description = db.Column(db.String(128), nullable=False)
+    # video link
 
-    # date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    
-    
-    # owner = db.relationship('User')
 
     def __repr__(self):
         return f'Business: {self.name} owned by {self.owner_id}'

@@ -234,19 +234,69 @@ def profile():
         user = User.query.get(session['id'])
 
         if request.method == 'POST':
-            user.first_name = request.form['first_name'].strip()
-            user.last_name = request.form['last_name'].strip()
-            user.email = request.form['email'].strip()
-            user.password = request.form['password'].strip()            
-            db.session.commit()
-            
-            return redirect(url_for('home'))        
+            try:
+                user.first_name = request.form['first_name'].strip()
+                user.last_name = request.form['last_name'].strip()
+                user.email = request.form['email'].strip()
+                user.password = request.form['password'].strip()            
+                db.session.commit()
+
+                return redirect(url_for('home'))       
+            except:
+                print('edit_profile form invalid')
+                flash('An error occured', 'danger') 
 
         return render_template('profile.html', user=user)
 
-    except:
-        return redirect(url_for('/index'))
-        
+    except Exception as e:
+        print(e)
+        flash('An error occured', 'danger')
+        return redirect('/')
+
+
+# Edit business information, only for owners
+@app.route('/edit/<int:business_id>', methods=['GET', 'POST'])
+def edit(business_id):
+    try:
+        user = User.query.get(session['id'])
+
+        if request.method == 'POST':
+            try:
+                business = Business.query.get(business_id)
+
+                business.name = request.form['name'].strip()
+                business.description = request.form['description'].strip()
+                
+                db.session.commit()
+            except:
+                print('edit_business.html form invalid')
+        return render_template('edit_business.html')
+    except Exception as e:
+        print(e)
+        flash('An error occured', 'danger')
+        return redirect('/')
+
+
+@app.route('/delete/<int:business_id>')
+def delete(business_id):
+    try:
+        business = Business.query.get(business_id)
+
+        # Only allow owner to delete business
+        if business.owner_id == session['id']:
+            Business.query.filter_by(id=business_id).delete()
+            db.session.commit()
+            print(f'Business {business_id} deleted!')
+            return redirect(url_for('home'))
+    
+    except Exception as e:
+        print(e)
+        flash('An error occured', 'danger')
+        return redirect('/')
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True, threaded=True)
