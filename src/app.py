@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request, session, url_for, f
 from models import db, User, Business, verify_password
 
 import os
+import glob
 import warnings
 import time
 warnings.filterwarnings('ignore')
@@ -11,8 +12,13 @@ app.config['SECRET_KEY'] = b'\xaa\xc1,g\xcc;\xe6D\xfa-\xf4|\xbd\xe3\xda\x07'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db' 
 app.config['DEBUG'] = True
 
+UPLOAD_FOLDER = 'static/uploads/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-# DELETE LATER, CLEARS DATABASE IF FOUND
+
+# DELETE LATER
+# Delete old database
 if os.path.exists('site.db'):
     os.remove('site.db')
 
@@ -31,7 +37,7 @@ with app.app_context():
         first_name='Andre',
         last_name='Hu',
         email='andre@test.com',
-        password='owner',
+        password='password',
         account_type='owner'
     )
     owner2 = User(
@@ -54,20 +60,29 @@ with app.app_context():
     db.session.add(owner3)
     db.session.commit()
 
-    user = User.query.filter_by(email='nick@test.com').first()
+    
     business = Business(
         name='McDonalds',
         description='lorem ipsum',
-        owner=user
+        owner=User.query.get(3),
+        image='mcdonalds.png'
     )
-    user = User.query.filter_by(email='andre@test.com').first()
+    
     business2 = Business(
         name='Wendys',
         description='lorem',
-        owner = user
+        owner=User.query.get(2),
+        image='wendys.png'
+    )
+    business3 = Business(
+        name='Taco Bell',
+        description='We sell tacos',
+        owner=User.query.get(4),
+        image='five_guys.png'
     )
     db.session.add(business)
     db.session.add(business2)
+    db.session.add(business3)
     db.session.commit()
 
 
@@ -212,6 +227,7 @@ def create():
             name = request.form['name'].strip()
             description = request.form['description'].strip()
 
+
             business = Business(name=name, description=description, owner=user)
             db.session.add(business)
             db.session.commit()
@@ -253,6 +269,13 @@ def profile():
         flash('An error occured', 'danger')
         return redirect('/')
 
+# Display image
+@app.route('/display/<filename>')
+def display_image(filename):
+	#print('display_image filename: ' + filename)
+	return redirect(url_for('static', filename='uploads/' + filename), code=301)
+
+
 
 # Edit business information, only for owners
 @app.route('/edit/<int:business_id>', methods=['GET', 'POST'])
@@ -293,8 +316,6 @@ def delete(business_id):
         print(e)
         flash('An error occured', 'danger')
         return redirect('/')
-
-
 
 
 

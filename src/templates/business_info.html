@@ -5,10 +5,14 @@
         <div class="box">
             <strong>{{ business.name }}</strong><br>
           
+            <figure class="image is-128x128">
+                <img src={{ url_for('display_image', filename=business.image) }}>
+            </figure>
+
             Description: {{ business.description }}<br>
 
             Owned by: {{ owner.first_name }} {{ owner.last_name }}<br>
-            
+
         </div>
     </div>
 {% endblock %}

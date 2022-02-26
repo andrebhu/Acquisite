@@ -4,7 +4,8 @@
 <div class="column is-6-desktop is-10-tablet">
     <div class="box">
         <h2 class="title is-2 has-text-centered">Create Company Profile</h2> 
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
+
             <div class="field mt-3">
                 <div class="control">
                     <label class="label">Company Name</label>
@@ -16,6 +17,13 @@
                 <div class="control">
                     <label class="label">Company Description</label>
                     <textarea class="textarea is-medium" name="description" required></textarea>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label class="label">Company Logo</label>
+                    <input type="file" name="file">
                 </div>
             </div>
 
