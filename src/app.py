@@ -188,8 +188,7 @@ def home():
 # View business information
 @app.route('/business/<int:business_id>')
 def business(business_id):
-    try:     
-        
+    try:             
         business = Business.query.get(business_id)
         owner = User.query.get(business.owner_id)
         
@@ -209,7 +208,6 @@ def create():
         if user.account_type != 'owner':
             return redirect(url_for('home'))
 
-
         if request.method == 'POST':
             name = request.form['name'].strip()
             description = request.form['description'].strip()
@@ -217,6 +215,8 @@ def create():
             business = Business(name=name, description=description, owner=user)
             db.session.add(business)
             db.session.commit()
+
+            print(f'Created new business {name}!')
             return redirect(f'/business/{business.id}')
         
         return render_template('create_business.html')
@@ -227,7 +227,26 @@ def create():
         
 
 
+# Profile, view/edit user information
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    try:
+        user = User.query.get(session['id'])
 
+        if request.method == 'POST':
+            user.first_name = request.form['first_name'].strip()
+            user.last_name = request.form['last_name'].strip()
+            user.email = request.form['email'].strip()
+            user.password = request.form['password'].strip()            
+            db.session.commit()
+            
+            return redirect(url_for('home'))        
+
+        return render_template('profile.html', user=user)
+
+    except:
+        return redirect(url_for('/index'))
+        
 
 if __name__ == "__main__":
     app.run(debug=True, threaded=True)

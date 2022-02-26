@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="box">
+        Account type: {{ user.account_type }}
+        <form method="post">
+            <input type="text" name="first_name" value={{ user.first_name }} required>
+            <input type="text" name="last_name" value={{ user.last_name }} required>
+            <input type="email" name="email" value={{ user.email }} required>
+            <input type="password" name="password" value={{ user.password }} required>
+            <input type="submit">
+        </form>
+    </div>
+{% endblock %}
