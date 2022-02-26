@@ -1,14 +1,14 @@
 from flask import Flask, render_template, redirect, request, session, url_for, flash
 from models import db, User, Post, verify_password
 
+import functools
 import os
 import warnings
 warnings.filterwarnings('ignore')
  
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = b'\xaa\xc1,g\xcc;\xe6D\xfa-\xf4|\xbd\xe3\xda\x07'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db' 
 app.config['DEBUG'] = True
 
 
@@ -20,12 +20,16 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+    # Test account
+    user = User(username='test', email='test', password='test', account_type='investor')
+    db.session.add(user)
+    db.session.commit()
 
-# ROUTES
 
+# UNAUTHED ROUTES
 @app.route('/')
 @app.route('/index')
-def index():
+def index():      
     return render_template('index.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -40,7 +44,7 @@ def login():
             if check_password:
                 session['id'] = user.id
                 session['username'] = user.username
-                return redirect('/home')
+                return redirect(url_for('home'))
 
         flash('An error occured')
 
@@ -61,7 +65,7 @@ def register():
 
             session['id'] = user.id
             session['username'] = user.username
-            return redirect('/home')
+            return redirect(url_for('home'))
 
         except:
             flash('An error occured')   
@@ -74,9 +78,22 @@ def logout():
     return redirect('/')
 
 
+# LOGGED IN ROUTES
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    try:
+        user = User.query.get(session['id'])
+
+        return render_template('home.html', **locals())
+    except:
+        flash('An error occured')
+        return redirect(url_for('index'))
+
+
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True, threaded=True)
