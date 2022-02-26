@@ -1,2 +1,3 @@
-# HackNYU_2022
-HackNYU 2022
+# Acquisite (Not final)
+
+hackNYU 2022

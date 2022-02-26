@@ -83,16 +83,25 @@ def logout():
 def home():
     try:
         user = User.query.get(session['id'])
-
-        return render_template('home.html', **locals())
+        return render_template('home.html', user=user)
     except:
         flash('An error occured')
         return redirect(url_for('index'))
 
 
 
+@app.route('/post/<int:post_id>')
+def post(post_id):
+    try:
+        post = Post.query.get(post_id)
+        return render_template('post.html', post=post)
+    except:
+        return redirect(url_for('home'))
 
 
+@app.route('/newpost')
+def newpost():
+    return render_template('newpost.html')
 
 
 if __name__ == "__main__":
