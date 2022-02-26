@@ -8,9 +8,13 @@
     <script src="https://kit.fontawesome.com/46826c2520.js" crossorigin="anonymous"></script>
   </head>
 
-  <body>    
-    <nav class="navbar is-white" role="navigation"  aria-label="main navigation">
-      <div class="navbar-brand">
+  <body>
+    {% if user %}    
+      <nav class="navbar is-primary" role="navigation"  aria-label="main navigation"></nav>
+    {% else %}
+      <nav class="navbar is-white" role="navigation"  aria-label="main navigation"></nav>
+    {% endif %}  
+      <div class="navbar-brand ">
         {% if user %}
         <a class="navbar-item" href="/home">
           <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
@@ -31,6 +35,7 @@
             <div class="buttons">
   
               {% if user %}
+              <a class="is-link mr-4" href={{ url_for('profile') }}>Account</a>
                 {% if user.account_type == "investor" %}
                 <a class="button is-link is-outlined" href={{ url_for('logout') }}>Logout</a>
                 {% elif user.account_type == "owner" %}

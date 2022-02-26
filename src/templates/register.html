@@ -1,12 +1,12 @@
 {% extends "form.html" %}
 
 {% block content %}
+<div class="columns is-centered">
     <div class="column is-4-desktop is-6-tablet">
         <div class="box">
             <h2 class="title is-2">Create an Account</h2> 
             <span>Have an account? <a href="/login">Login</a></span>
             <form method="post">
-
                 <div class="field mt-5">
                     <p class="control has-icons-left">
                         <input class="input" name="first_name" type="text" placeholder="First Name" required>
@@ -75,5 +75,5 @@
         </div>
     </div>
 
-
+</div>
 {% endblock %}

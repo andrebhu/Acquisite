@@ -1,14 +1,57 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="box">
-        Account type: {{ user.account_type }}
-        <form method="post">
-            <input type="text" name="first_name" value={{ user.first_name }} required>
-            <input type="text" name="last_name" value={{ user.last_name }} required>
-            <input type="email" name="email" value={{ user.email }} required>
-            <input type="password" name="password" value={{ user.password }} required>
-            <input type="submit">
-        </form>
+<div class="columns is-centered">
+    <div class="column is-8-desktop is-10-tablet mt-6">
+        <div class="box">
+            <h2 class="title is-2">Edit Profile</h2> 
+           <h5 class="subtitle mt-2 h5">Account Type: {{ user.account_type[0]|upper }}{{ user.account_type[1:] }}</h5>
+            <form method="post">
+                <div class="field mt-3">
+                    <label class="label">First Name</label>
+                    <p class="control has-icons-left">
+                        <input class="input is-medium" type="text" name="first_name" value={{ user.first_name }} required/>
+                        <span class="icon is-medium is-left">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                    </p>
+                </div>
+    
+                <div class="field">
+                    <label class="label">Last Name</label>
+                    <div class="control has-icons-left">
+                        <input class="input is-medium" type="text" name="last_name" value={{ user.last_name }} required/>
+                        <span class="icon is-small is-left">
+                            <i class="fa-solid fa-address-card"></i>
+                        </span>
+                    </div>
+                </div>
+    
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control has-icons-left">
+                        <input class="input is-medium" type="email" name="email" value={{ user.email }} required/>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </div>
+                </div>
+    
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control has-icons-left">
+                        <input class="input is-medium" type="password" name="password" value={{ user.password }} required/>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="control">
+                    <button class="button is-link" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
 {% endblock %}
