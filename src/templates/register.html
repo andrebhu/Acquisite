@@ -1,17 +1,58 @@
-{% extends "base.html" %}
+{% extends "form.html" %}
 
 {% block content %}
-Register
-<form method="post">
-    <input type="text" name="username" placeholder="username" required>
-    <input type="text" name="email" placeholder="email" required>
-    <input type="password" name="password" placeholder="password" required>
-    
-    <select name="account_type" id="account_type">
-        <option value="investor">investor</option>
-        <option value="business_owner">business_owner</option>
-    </select>
+    <div class="column is-4">
+        <div class="box">
+            <form method="post">
 
-    <input type="submit" value="Register now!">
-</form>
+                <div class="field">
+                    <input class="input" name="first_name" type="text" placeholder="First Name" required>
+                </div>
+
+                <div class="field">
+                    <input class="input" name="last_name" type="text" placeholder="Last Name" required>
+                </div>
+
+                <div class="field">
+                    <input class="input" name="email" type="email" placeholder="Email" required>
+                
+                </div>
+
+                <div class="field">
+                    <input class="input" name="password" type="password" placeholder="Password" required>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <label class="radio">
+                            <input type="radio" name="account_type" value="investor">
+                            Investor
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="account_type" value="business_owner">
+                            Business Owner
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control">
+                    <button class="button is-link">Register</button>
+                </div>
+
+                
+                <!-- <input type="text" name="username" placeholder="username" required>
+                <input type="text" name="email" placeholder="email" required>
+                <input type="password" name="password" placeholder="password" required>
+                
+                <select name="account_type" id="account_type">
+                    <option value="investor">investor</option>
+                    <option value="business_owner">business_owner</option>
+                </select>
+            
+                <input type="submit" value="Register now!"> -->
+            </form>
+        </div>
+    </div>
+
+
 {% endblock %}

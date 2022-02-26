@@ -1,10 +1,31 @@
-{% extends "base.html" %}
+{% extends "form.html" %}
 
 {% block content %}
+<div class="column is-4">
+    <div class="box">
+        <form method="post">
+
+            <div class="field">
+                <input class="input" name="email" type="email" placeholder="Email" required>            
+            </div>
+
+            <div class="field">
+                <input class="input" name="password" type="password" placeholder="Password" required>
+            </div>
+
+            <div class="control">
+                <button class="button is-link">Login</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- 
 Login
 <form method="post">
     <input type="text" name="username" required>
     <input type="password" name="password" required>
     <input type="submit" value="Login">
-</form>
+</form> -->
 {% endblock %}
