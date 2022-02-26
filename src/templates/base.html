@@ -11,18 +11,20 @@
   <body>    
     <nav class="navbar is-white">
       <div class="navbar-brand">
-        <a class="navbar-item" href="/home">
+        <a class="navbar-item" href="/index">
           <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
         </a>
       </div>
 
+      {% if user %}
       <div class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item">
+          <a class="navbar-item" href="/home">
             Home
           </a>
         </div>
       </div>
+      {% endif %}
 
       <div class="navbar-end">
         <div class="navbar-item">
@@ -42,11 +44,11 @@
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
           {% for category, message in messages %}
-            <article class="message is-{{ category }}">
-              <div class="message-body">
-                {{ message }}
-              </div>
-            </article>
+          <article class="message is-{{ category }}">
+            <div class="message-body">
+              {{ message }}
+            </div>
+          </article>
           {% endfor %}
         {% endif %}
       {% endwith %}

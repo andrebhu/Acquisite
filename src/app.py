@@ -30,13 +30,11 @@ with app.app_context():
     user = User.query.get(2)
     business = Business(
         name='McDonalds',
-        size=10,
         description='lorem ipsum',
         owner=user
     )
     business2 = Business(
         name='Wendys',
-        size=0,
         description='lorem',
         owner = user
     )
@@ -55,8 +53,12 @@ def lost(anything):
 # Main site
 @app.route('/')
 @app.route('/index')
-def index():      
-    return render_template('index.html')
+def index():
+    try:
+        user = User.query.get(session['id'])
+        return render_template('index.html', user=user)
+    except:
+        return render_template('index.html')
 
 
 @app.route('/logout')
@@ -85,7 +87,7 @@ def login():
 
     # If already logged in, redirect to home
     try:
-        user = User.query.get(session['id'])
+        user_id = User.query.get(session['id'])
         return redirect(url_for('home'))
     except:
         return render_template('login.html')
@@ -122,7 +124,7 @@ def register():
         return render_template('register.html')
 
 
-# LOGGED IN ROUTES
+# Home page for users
 @app.route('/home')
 def home():
     try:
@@ -144,6 +146,7 @@ def home():
         return redirect(url_for('index'))
 
 
+# View business information
 @app.route('/business/<int:business_id>')
 def business(business_id):
     try:
@@ -160,7 +163,20 @@ def business(business_id):
         flash('An error occured', 'danger')
         return redirect(url_for('home'))
 
+# Create a new business only for owners
+@app.route('/create', methods=['GET', 'POST'])
+def create():
+    try:
+        if request.method == 'POST':
+            name = request.form['name'].strip()
+            description = request.form['description'].strip()
+        
+            business = Business(name=name, description=description)
 
+    except:
+        flash('An error occured', 'danger')
+        return render_template('create_business.html')
+        
 
 
 
