@@ -1,18 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    <div class="column is-4">
-        <div class="box">
-            <h1>Searchers</h1>
-            <a href="/register">Register today!</a>
-        </div>                
+<div class="columns">
+    <div class="column is-10 is-offset-1">
+        <div class="columns  is-centered has-background-info-light">
+            <div class="column is-5 my-6">
+                <div class="box">
+                    <h2 class="title is-2">Searchers</h2>
+                    <h4 class="subtitle is-4 my-3">Subtitle 4</h4>
+                    <a class="button is-fullwidth is-link "href="/register">Register today!</a>
+                </div>                
+            </div>
+            <div class="column is-5 my-6">
+                <div class="box">
+                    <h2 class="title is-2">Business Owners</h2>
+                    <h4 class="subtitle is-4 my-3">Subtitle 4</h4>
+                    <a class="button is-fullwidth is-link "href="/register">Register today!</a>
+                </div>                
+            </div>    
+        </div>
     </div>
-    <div class="column is-4">
-        <div class="box">
-            <h1>Business Owners</h1>
-            <a href="/register">Register today!</a>
-        </div>                
-    </div>    
-    
+</div>
+
 {% endblock %}

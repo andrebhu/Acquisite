@@ -8,9 +8,7 @@
   </head>
 
   <body>
-
-    
-    <nav class="navbar is-info">
+    <nav class="navbar is-white">
       <div class="navbar-brand">
         <a class="navbar-item" href="/home">
           <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
@@ -28,7 +26,7 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-outlined">Login</a>
+            <a class="button is-link is-outlined" href="/login">Login</a>
           </div>
         </div>
       </div>
@@ -47,17 +45,9 @@
           {% endfor %}
         {% endif %}
       {% endwith %}
-      
-      <article class="message is-danger">
-        <div class="message-body">
-          Testing
-        </div>
-      </article>
 
-      <div class="columns is-centered">
-        {% block content %}
-        {% endblock %}
-      </div>
+      {% block content %}
+      {% endblock %}
     </main>
   </body>
 </html>
