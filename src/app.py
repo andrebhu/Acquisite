@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, request, session, url_for, flash
-from models import db, User, Post, verify_password
+from models import db, User, Business, verify_password
 
 import os
 import warnings
@@ -20,12 +20,20 @@ with app.app_context():
     db.create_all()
 
     # Test account
-    user = User(first_name='test', last_name='test', email='test', password='test', account_type='investor')
+    user = User(first_name='test', last_name='test', email='test@test.com', password='test', account_type='investor')
     db.session.add(user)
     db.session.commit()
 
-    post = Post(title='title', content='lorem ipsum', owner_id=user.id)
-    db.session.add(post)
+    user = User.query.get(1)
+    business = Business(
+        name='McDonalds',
+        employees=10,
+        description='lorem ipsum',
+        owner_first_name='test',
+        owner_last_name='test',
+        owner=user
+    )
+    db.session.add(business)
     db.session.commit()
 
 
@@ -55,6 +63,7 @@ def login():
 
     return render_template('login.html')
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -80,6 +89,7 @@ def register():
     
     return render_template('register.html')
 
+
 @app.route('/logout')
 def logout():
     session.clear()
@@ -91,7 +101,11 @@ def logout():
 def home():
     try:
         user = User.query.get(session['id'])
-        return render_template('home.html', user=user)
+        if user.account_type == 'investor':
+            return render_template('investor.html', user=user)
+        elif user.account_type == 'business_owner':
+            return render_template('owner.html', user=user)
+        
     except Exception as e:
         flash('An error occured', 'danger')
         return redirect(url_for('index'))

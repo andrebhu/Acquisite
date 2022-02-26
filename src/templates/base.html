@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/46826c2520.js" crossorigin="anonymous"></script>
   </head>
 
-  <body>
+  <body>    
     <nav class="navbar is-white">
       <div class="navbar-brand">
         <a class="navbar-item" href="/home">
@@ -33,8 +33,8 @@
       </div>
     </nav>
 
-    <main>
 
+    <main>
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
           {% for category, message in messages %}

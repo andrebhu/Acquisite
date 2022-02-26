@@ -14,29 +14,32 @@ business_owner, investor
 '''
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(20), nullable=False)
-    last_name = db.Column(db.String(20), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(60), nullable=False)
-    posts = db.relationship('Post', backref='owner')
+    first_name = db.Column(db.String(128), nullable=False)
+    last_name = db.Column(db.String(128), nullable=False)
+    email = db.Column(db.String(128), unique=True, nullable=False)
+    password = db.Column(db.String(128), nullable=False)
+    businesses = db.relationship('business', backref='owner', lazy='dynamic')
     account_type = db.Column(db.String(20), nullable=False)
 
     def __repr__(self):
         return f'User: {self.id} {self.account_type} {self.username} {self.email} {self.password}'
 
 
-class Post(db.Model):
+class Business(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    company_name = db.Column(db.String(128), nullable=False)
-    location = db.Column(db.String(128), nullable=False)
-    industry = db.Column(db.String(128), nullable=False)
-    employees = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String(128), nullable=False)
+
+    # location = db.Column(db.String(128), nullable=False)
+    # industry = db.Column(db.String(128), nullable=False)
+    
+    employees = db.Column(db.Integer)
     description = db.Column(db.String(128), nullable=False)
+
     # date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    content = db.Column(db.Text())
-    owner_first_name = db.Column(db.String(128), nullable=False)
-    owner_last_name = db.Column(db.String(128), nullable=False)
+    first_name = db.Column(db.String(128))
+    last_name= db.Column(db.String(128))
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    # owner = db.relationship('User')
 
     def __repr__(self):
         return f'Post: {self.title} owner_id: {self.owner_id}'
