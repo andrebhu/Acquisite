@@ -22,7 +22,9 @@ with app.app_context():
 
     # Test account
     user = User(username='test', email='test', password='test', account_type='investor')
+    post = Post(title='title', content='lorem ipsum', owner_id=user.id)
     db.session.add(user)
+    db.session.add(post)
     db.session.commit()
 
 
