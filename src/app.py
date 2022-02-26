@@ -74,11 +74,14 @@ def login():
         password = request.form['password'].strip()
 
         user = User.query.filter_by(email=email).first()
+
         if user:
             check_password = verify_password(user.password, password)
             if check_password:
-                print(f'Logged in {user.first_name} {email}!')
                 session['id'] = user.id
+                session['type'] = user.account_type
+
+                print(f'Logged in {user.first_name} {email}!')
                 return redirect(url_for('home'))
         else:
             print(f'Could not find {email}')
@@ -108,6 +111,7 @@ def register():
             db.session.commit()
 
             session['id'] = user.id
+            session['type'] = user.account_type
 
             print(f'Registered {first_name} {email}!')
             return redirect(url_for('home'))
@@ -150,12 +154,12 @@ def home():
 @app.route('/business/<int:business_id>')
 def business(business_id):
     try:
-        start = time.time()
+        start = time.time() # Analyze performance
         
         business = Business.query.get(business_id)
         owner = User.query.get(business.owner_id)
 
-        end = time.time()
+        end = time.time() # Analyze performance
         time_elapsed = "{:.4f}s".format(end - start)
 
         return render_template('business_info.html', **locals())
@@ -167,11 +171,24 @@ def business(business_id):
 @app.route('/create', methods=['GET', 'POST'])
 def create():
     try:
+        user = User.query.get(session['id'])
+
+        # Only owners can create a business
+        if user.account_type != 'owner':
+            return redirect(url_for('home'))
+
+
         if request.method == 'POST':
             name = request.form['name'].strip()
             description = request.form['description'].strip()
+
+            business = Business(name=name, description=description, owner=user)
+            db.session.add(business)
+            db.session.commit()
+            return redirect(f'/business/{business.id}')
         
-            business = Business(name=name, description=description)
+        return render_template('create_business.html')
+        
 
     except:
         flash('An error occured', 'danger')
