@@ -20,11 +20,7 @@ with app.app_context():
     db.create_all()
 
     # Test account
-<<<<<<< HEAD
-    user = User(username='test', email='test', password='test', account_type='investor')
-=======
     user = User(first_name='test', last_name='test', email='test', password='test', account_type='investor')
->>>>>>> Add registration page, convert username into first/last name
     db.session.add(user)
     db.session.commit()
 
