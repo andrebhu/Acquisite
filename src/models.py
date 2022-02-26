@@ -10,7 +10,7 @@ def verify_password(plaintext, ciphertext):
 
 '''
 Business Owner Account
-business_owner, investor
+owner, investor
 '''
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -18,7 +18,7 @@ class User(db.Model):
     last_name = db.Column(db.String(128), nullable=False)
     email = db.Column(db.String(128), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
-    businesses = db.relationship('business', backref='owner', lazy='dynamic')
+    businesses = db.relationship('Business', backref='owner', lazy=True)
     account_type = db.Column(db.String(20), nullable=False)
 
     def __repr__(self):
@@ -36,10 +36,10 @@ class Business(db.Model):
     description = db.Column(db.String(128), nullable=False)
 
     # date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    first_name = db.Column(db.String(128))
-    last_name= db.Column(db.String(128))
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
+    
     # owner = db.relationship('User')
 
     def __repr__(self):
-        return f'Post: {self.title} owner_id: {self.owner_id}'
+        return f'Business: {self.name} owned by {self.owner_id}'

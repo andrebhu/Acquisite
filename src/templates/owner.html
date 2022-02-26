@@ -3,10 +3,16 @@
 {% block content %}
     <div class="column is-centered">
         <div class="box">
-            Welcome, {{ user.first_name }} <br>
-            Business Owner
+            <h1>Welcome, {{ user.first_name }}</h1>
+            
+            Currently owned businesses: <br>
+            {% for b in user.businesses %}
+                <div class="box">
+                    {{ b.name }}
+                </div>
+            {% endfor %}
 
-            {{ user.businesses }}
+            
         </div>
     </div>
 {% endblock %}

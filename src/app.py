@@ -19,22 +19,34 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-    # Test account
-    user = User(first_name='test', last_name='test', email='test@test.com', password='test', account_type='investor')
-    db.session.add(user)
+    # Test Data
+    investor = User(first_name='Mark', last_name='Cuban', email='investor@test.com', password='investor', account_type='investor')
+    owner = User(first_name='Andre', last_name='Hu', email='owner@test.com', password='owner', account_type='owner')
+    db.session.add(investor)
+    db.session.add(owner)
     db.session.commit()
 
-    user = User.query.get(1)
+    user = User.query.get(2)
     business = Business(
         name='McDonalds',
         employees=10,
         description='lorem ipsum',
-        owner_first_name='test',
-        owner_last_name='test',
         owner=user
     )
+    business2 = Business(
+        name='Wendys',
+        employees=0,
+        description='lorem',
+        owner = user
+    )
     db.session.add(business)
+    db.session.add(business2)
     db.session.commit()
+
+# Redirect lost souls
+@app.route('/<anything>')
+def lost(anything):
+    return redirect(url_for('home'))
 
 
 # UNAUTHED ROUTES
@@ -43,18 +55,18 @@ with app.app_context():
 def index():      
     return render_template('index.html')
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form['email'].strip()
         password = request.form['password'].strip()
 
-        print(f'Logging in with {email}:{password}')
-
         user = User.query.filter_by(email=email).first()
         if user:
             check_password = verify_password(user.password, password)
             if check_password:
+                print(f'Logged in {user.first_name} {email}!')
                 session['id'] = user.id
                 return redirect(url_for('home'))
         else:
@@ -73,14 +85,14 @@ def register():
         password = request.form['password'].strip()
         account_type = request.form['account_type'].strip()
 
-        print(f'Registering User: {first_name} {last_name} {email} {password} {account_type}')
-
         try:
             user = User(first_name=first_name, last_name=last_name, email=email, password=password, account_type=account_type)
             db.session.add(user)
             db.session.commit()
 
             session['id'] = user.id
+
+            print(f'Registered {first_name} {email}!')
             return redirect(url_for('home'))
 
         except Exception as e:
@@ -101,29 +113,22 @@ def logout():
 def home():
     try:
         user = User.query.get(session['id'])
+
         if user.account_type == 'investor':
-            return render_template('investor.html', user=user)
-        elif user.account_type == 'business_owner':
+            businesses = Business.query.all()
+            return render_template('investor.html', user=user, businesses=businesses)
+
+        elif user.account_type == 'owner':            
             return render_template('owner.html', user=user)
+            
         
     except Exception as e:
-        flash('An error occured', 'danger')
+        print(e)
+        # flash('An error occured', 'danger')
         return redirect(url_for('index'))
 
 
 
-@app.route('/post/<int:post_id>')
-def post(post_id):
-    try:
-        post = Post.query.get(post_id)
-        return render_template('post.html', post=post)
-    except:
-        return redirect(url_for('home'))
-
-
-@app.route('/newpost')
-def newpost():
-    return render_template('newpost.html')
 
 
 if __name__ == "__main__":
