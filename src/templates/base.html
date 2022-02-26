@@ -27,7 +27,11 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
+            {% if user %}
+            <a class="button is-link is-outlined" href={{ url_for('logout') }}>Logout</a>
+            {% else %}
             <a class="button is-link is-outlined" href="/login">Login</a>
+            {% endif %}            
           </div>
         </div>
       </div>
