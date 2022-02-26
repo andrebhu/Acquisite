@@ -33,21 +33,17 @@ with app.app_context():
 def index():
     return render_template('index.html')
 
-@app.route('/')
+@app.route('/login')
 def login():
-    pass
+    return render_template('login.html')
 
 @app.route('/register')
 def register():
-
-    pass
+    return render_template('register.html')
 
 @app.route('/home')
-
-
-
-
-# db.session.commit()
+def home():
+    return render_template('home.html')
 
 
 if __name__ == "__main__":
