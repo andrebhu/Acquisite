@@ -1,9 +1,30 @@
-{% extends "base.html" %}
+{% extends "form.html" %}
 
 {% block content %}
-    <form method="post">
-        <input type="text" name="name" placeholder="name" required>
-        <input type="text" name="description" placeholder="Company description" required>
-        <input type="submit">
-    </form>
+<div class="column is-6-desktop is-10-tablet">
+    <div class="box">
+        <h2 class="title is-2 has-text-centered">Create Company Profile</h2> 
+        <form method="post">
+            <div class="field mt-3">
+                <div class="control">
+                    <label class="label">Company Name</label>
+                    <input type="text" class="input is-medium" name="name" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label class="label">Company Description</label>
+                    <textarea class="textarea is-medium" name="description" required></textarea>
+                </div>
+            </div>
+
+            <div class="control">
+                <button class="button is-medium is-fullwidth is-link" type="submit">Submit</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
 {% endblock %}

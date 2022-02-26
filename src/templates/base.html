@@ -9,34 +9,43 @@
   </head>
 
   <body>    
-    <nav class="navbar is-white">
+    <nav class="navbar is-white" role="navigation"  aria-label="main navigation">
       <div class="navbar-brand">
+        {% if user %}
+        <a class="navbar-item" href="/home">
+          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+        </a>
+        {% else %}
         <a class="navbar-item" href="/index">
           <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
         </a>
+        {% endif %}
+
       </div>
 
-      {% if user %}
-      <div class="navbar-menu">
+      <div class="navbar-menu is-active">
         <div class="navbar-start">
-          <a class="navbar-item" href="/home">
-            Home
-          </a>
         </div>
-      </div>
-      {% endif %}
-
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            {% if user %}
-            <a class="button is-link is-outlined" href={{ url_for('logout') }}>Logout</a>
-            {% else %}
-            <a class="button is-link is-outlined" href="/login">Login</a>
-            {% endif %}            
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+  
+              {% if user %}
+                {% if user.account_type == "investor" %}
+                <a class="button is-link is-outlined" href={{ url_for('logout') }}>Logout</a>
+                {% elif user.account_type == "owner" %}
+                <a class="is-link mr-4" href={{ url_for('create') }}>Create Business</a>
+                <a class="button is-link is-outlined" href={{ url_for('logout') }}>Logout</a>
+                {% endif %}         
+              {% else %}
+              <a class="button is-link is-outlined" href="/login">Login</a>
+              {% endif %}            
+            </div>
           </div>
         </div>
       </div>
+
+      
     </nav>
 
 
