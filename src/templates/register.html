@@ -2,11 +2,16 @@
 
 {% block content %}
 Register
-<form>
-    <input type="text" name="username" required>
-    <input type="text" name="email" required>
-    <input type="password" name="password" required>
+<form method="post">
+    <input type="text" name="username" placeholder="username" required>
+    <input type="text" name="email" placeholder="email" required>
+    <input type="password" name="password" placeholder="password" required>
+    
+    <select name="account_type" id="account_type">
+        <option value="investor">investor</option>
+        <option value="business_owner">business_owner</option>
+    </select>
 
-    <input type="submit" value="Login">
+    <input type="submit" value="Register now!">
 </form>
 {% endblock %}
