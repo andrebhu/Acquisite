@@ -27,9 +27,15 @@ class User(db.Model):
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(128), nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    company_name = db.Column(db.String(128), nullable=False)
+    location = db.Column(db.String(128), nullable=False)
+    industry = db.Column(db.String(128), nullable=False)
+    employees = db.Column(db.Integer, nullable=False)
+    description = db.Column(db.String(128), nullable=False)
+    # date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     content = db.Column(db.Text())
+    owner_first_name = db.Column(db.String(128), nullable=False)
+    owner_last_name = db.Column(db.String(128), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
