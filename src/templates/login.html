@@ -1,16 +1,28 @@
 {% extends "form.html" %}
 
 {% block content %}
-<div class="column is-4">
+<div class="column is-4-desktop is-6-tablet">
     <div class="box">
+        <h2 class="title is-2">Login</h2> 
+        <span>Not registered? <a href="/register">Create an Account</a></span>
         <form method="post">
 
-            <div class="field">
-                <input class="input" name="email" type="email" placeholder="Email" required>            
+            <div class="field mt-3">
+                <p class="control has-icons-left">
+                  <input class="input" type="email" placeholder="Email" required>
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                </p>
             </div>
 
             <div class="field">
-                <input class="input" name="password" type="password" placeholder="Password" required>
+                <p class="control has-icons-left">
+                  <input class="input" type="password" placeholder="Password">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                </p>
             </div>
 
             <div class="control">
