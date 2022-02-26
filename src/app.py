@@ -21,18 +21,46 @@ with app.app_context():
     db.create_all()
 
     # Test Data
-    investor = User(first_name='Mark', last_name='Cuban', email='investor@test.com', password='investor', account_type='investor')
-    owner = User(first_name='Andre', last_name='Hu', email='owner@test.com', password='owner', account_type='owner')
+    investor = User(
+        first_name='Mark',
+        last_name='Cuban',
+        email='investor@test.com',
+        password='investor',
+        account_type='investor')
+    owner = User(
+        first_name='Andre',
+        last_name='Hu',
+        email='andre@test.com',
+        password='owner',
+        account_type='owner'
+    )
+    owner2 = User(
+        first_name='Nick',
+        last_name='Wu',
+        email='nick@test.com',
+        password='password',
+        account_type='owner'
+    )
+    owner3 = User(
+        first_name='Arjun',
+        last_name='Kubal',
+        email='arjun@test.com',
+        password='password',
+        account_type='owner'
+    )
     db.session.add(investor)
     db.session.add(owner)
+    db.session.add(owner2)
+    db.session.add(owner3)
     db.session.commit()
 
-    user = User.query.get(2)
+    user = User.query.filter_by(email='nick@test.com').first()
     business = Business(
         name='McDonalds',
         description='lorem ipsum',
         owner=user
     )
+    user = User.query.filter_by(email='andre@test.com').first()
     business2 = Business(
         name='Wendys',
         description='lorem',
@@ -75,16 +103,14 @@ def login():
 
         user = User.query.filter_by(email=email).first()
 
-        if user:
-            check_password = verify_password(user.password, password)
-            if check_password:
-                session['id'] = user.id
-                session['type'] = user.account_type
+        if user and verify_password(user.password, password):
+            session['id'] = user.id
+            session['type'] = user.account_type
 
-                print(f'Logged in {user.first_name} {email}!')
-                return redirect(url_for('home'))
+            print(f'Logged in {email}!')
+            return redirect(url_for('home'))
         else:
-            print(f'Could not find {email}')
+            print(f'Could not find {email} or incorrect password')
             flash('An error occured', 'danger')
 
 
@@ -99,17 +125,26 @@ def login():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        first_name = request.form['first_name'].strip()
-        last_name = request.form['last_name'].strip()
-        email = request.form['email'].strip()
-        password = request.form['password'].strip()
-        account_type = request.form['account_type'].strip()
-
+        
         try:
+            # Retrieve elements from HTML
+            first_name = request.form['first_name'].strip()
+            last_name = request.form['last_name'].strip()
+            email = request.form['email'].strip()
+            password = request.form['password'].strip()
+            account_type = request.form['account_type'].strip()
+        
+            # Check if email is in use
+            if User.query.filter_by(email=email).first():
+                flash('Email already in use', 'danger')
+                return render_template('register.html')
+
+            # Create user and commit to database
             user = User(first_name=first_name, last_name=last_name, email=email, password=password, account_type=account_type)
             db.session.add(user)
             db.session.commit()
 
+            # Set session cookies
             session['id'] = user.id
             session['type'] = user.account_type
 
@@ -153,19 +188,16 @@ def home():
 # View business information
 @app.route('/business/<int:business_id>')
 def business(business_id):
-    try:
-        start = time.time() # Analyze performance
+    try:     
         
         business = Business.query.get(business_id)
         owner = User.query.get(business.owner_id)
-
-        end = time.time() # Analyze performance
-        time_elapsed = "{:.4f}s".format(end - start)
-
+        
         return render_template('business_info.html', **locals())
     except:
         flash('An error occured', 'danger')
         return redirect(url_for('home'))
+
 
 # Create a new business only for owners
 @app.route('/create', methods=['GET', 'POST'])
@@ -189,11 +221,11 @@ def create():
         
         return render_template('create_business.html')
         
-
     except:
         flash('An error occured', 'danger')
         return render_template('create_business.html')
         
+
 
 
 

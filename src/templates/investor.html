@@ -10,10 +10,10 @@
             All businesses:
             {% for b in businesses %}
             <div class="box">
-                {{ b.name }}
+                <a href="/business/{{ b.id | safe }}">{{ b.name }}</a>
+                Owned by: <strong> {{ b.owner.first_name }} {{b.owner.last_name }}</strong>
             </div>                
-            {% endfor %}
-            
+            {% endfor %}            
         </div>
     </div>
 {% endblock %}
