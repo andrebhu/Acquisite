@@ -1,25 +1,46 @@
 {% extends "form.html" %}
 
 {% block content %}
-    <div class="column is-4">
+    <div class="column is-6">
         <div class="box">
+            <h2 class="title is-2">Create an Account</h2> 
+            <span>Have an account? <a href="/login">Login</a></span>
             <form method="post">
 
-                <div class="field">
-                    <input class="input" name="first_name" type="text" placeholder="First Name" required>
+                <div class="field mt-5">
+                    <p class="control has-icons-left">
+                        <input class="input" name="first_name" type="text" placeholder="First Name" required>
+                        <span class="icon is-small is-left">
+                            <i class="fa-solid fa-user"></i
+                        </span>
+                    </p>
                 </div>
 
                 <div class="field">
-                    <input class="input" name="last_name" type="text" placeholder="Last Name" required>
+                    <p class="control has-icons-left">
+                        <input class="input" name="last_name" type="text" placeholder="Last Name" required>
+                        <span class="icon is-small is-left">
+                            <i class="fa-solid fa-address-card"></i>
+                        </span>
+                    </p>
                 </div>
 
                 <div class="field">
-                    <input class="input" name="email" type="email" placeholder="Email" required>
-                
+                    <p class="control has-icons-left">
+                      <input class="input" type="email" placeholder="Email" required>
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                      </span>
+                    </p>
                 </div>
 
                 <div class="field">
-                    <input class="input" name="password" type="password" placeholder="Password" required>
+                    <p class="control has-icons-left">
+                      <input class="input" type="password" placeholder="Password">
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                      </span>
+                    </p>
                 </div>
 
                 <div class="field">
