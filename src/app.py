@@ -3,6 +3,7 @@ from models import db, User, Business, verify_password
 
 import os
 import warnings
+import time
 warnings.filterwarnings('ignore')
  
 app = Flask(__name__)
@@ -29,13 +30,13 @@ with app.app_context():
     user = User.query.get(2)
     business = Business(
         name='McDonalds',
-        employees=10,
+        size=10,
         description='lorem ipsum',
         owner=user
     )
     business2 = Business(
         name='Wendys',
-        employees=0,
+        size=0,
         description='lorem',
         owner = user
     )
@@ -43,17 +44,25 @@ with app.app_context():
     db.session.add(business2)
     db.session.commit()
 
+
+
 # Redirect lost souls
 @app.route('/<anything>')
 def lost(anything):
     return redirect(url_for('home'))
 
 
-# UNAUTHED ROUTES
+# Main site
 @app.route('/')
 @app.route('/index')
 def index():      
     return render_template('index.html')
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -73,7 +82,13 @@ def login():
             print(f'Could not find {email}')
             flash('An error occured', 'danger')
 
-    return render_template('login.html')
+
+    # If already logged in, redirect to home
+    try:
+        user = User.query.get(session['id'])
+        return redirect(url_for('home'))
+    except:
+        return render_template('login.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -99,13 +114,12 @@ def register():
             print(e)
             flash('An error occured', 'danger')   
     
-    return render_template('register.html')
-
-
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect('/')
+    # If already logged in, redirect to home
+    try:
+        user = User.query.get(session['id'])
+        return redirect(url_for('home'))
+    except:
+        return render_template('register.html')
 
 
 # LOGGED IN ROUTES
@@ -120,12 +134,31 @@ def home():
 
         elif user.account_type == 'owner':            
             return render_template('owner.html', user=user)
-            
+
+        # Weird user.account_type?
+        return redirect(url_for('logout'))    
         
     except Exception as e:
         print(e)
         # flash('An error occured', 'danger')
         return redirect(url_for('index'))
+
+
+@app.route('/business/<int:business_id>')
+def business(business_id):
+    try:
+        start = time.time()
+        
+        business = Business.query.get(business_id)
+        owner = User.query.get(business.owner_id)
+
+        end = time.time()
+        time_elapsed = "{:.4f}s".format(end - start)
+
+        return render_template('business_info.html', **locals())
+    except:
+        flash('An error occured', 'danger')
+        return redirect(url_for('home'))
 
 
 

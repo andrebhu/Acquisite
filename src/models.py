@@ -32,7 +32,7 @@ class Business(db.Model):
     # location = db.Column(db.String(128), nullable=False)
     # industry = db.Column(db.String(128), nullable=False)
     
-    employees = db.Column(db.Integer)
+    size = db.Column(db.Integer)
     description = db.Column(db.String(128), nullable=False)
 
     # date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)

@@ -8,10 +8,9 @@
             Currently owned businesses: <br>
             {% for b in user.businesses %}
                 <div class="box">
-                    {{ b.name }}
+                    <a href="/business/{{ b.id | safe }}">{{ b.name }}</a>
                 </div>
             {% endfor %}
-
             
         </div>
     </div>
