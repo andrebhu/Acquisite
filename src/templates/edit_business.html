@@ -25,15 +25,15 @@
                     <label class="label">Industry</label>
                     <div class="control">
                         <span class="select">
-                            <select name="industry">
-                                <option selected="true" disabled="disabled">Select an Industry</option>
-                                <option value="food service" name="industry">Food Service</option>
-                                <option value="hospitality" name="industry">Hospitality</option>
-                                <option value="construction" name="industry">Construction</option>
-                                <option value="liquor store" name="industry">Liquor Store</option>
-                                <option value="gas station" name="industry">Gas Station</option>
-                                <option value="storage" name="industry">Storage</option>
-                                <option value="repair & maintenance" name="industry">Repair & Maintenance</option>
+                            <select name="industry" required>
+                                <option value="" selected="true" disabled="disabled">Select an Industry</option>
+                                <option value="food service">Food Service</option>
+                                <option value="hospitality">Hospitality</option>
+                                <option value="construction">Construction</option>
+                                <option value="liquor store">Liquor Store</option>
+                                <option value="gas station">Gas Station</option>
+                                <option value="storage">Storage</option>
+                                <option value="repair & maintenance">Repair & Maintenance</option>
                             </select>
                         </span>
                     </div>
@@ -53,7 +53,14 @@
                     </div>
                 </div>
 
-<!-- 
+                <div class="field">
+                    <div class="control">
+                        <label class="label">Twitter</label>
+                        <input type="text" name="twitter" class="input is-medium" value={{ business.twitter }}>
+                    </div>
+                </div>
+
+
                 <div class="field">
                     <label class="label">Company Image</label>
                     <div class="file has-name is-fullwidth">
@@ -72,12 +79,11 @@
                         </span>
                         </label>
                     </div>
-                </div> -->
+                </div>
 
                 <div class="control">
                     <button class="button is-medium is-fullwidth is-link" type="submit">Submit</button>
                 </div>
-
             </form>
         </div>
     </div>
