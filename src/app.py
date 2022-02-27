@@ -300,8 +300,12 @@ def edit(business_id):
                 print(e)
                 flash('An error occured', 'danger')
                 
-        business = Business.query.get(business_id)
-        return render_template('edit_business.html', **locals())
+
+        if int(business.owner.id) == int(session['id']):
+            return render_template('edit_business.html', **locals())
+        else:
+            flash('An error occured', 'danger')
+            return redirect('/')
 
     except Exception as e:
         print(e)
@@ -315,7 +319,7 @@ def delete(business_id):
         business = Business.query.get(business_id)
 
         # Only allow owner to delete business
-        if business.owner_id == session['id']:
+        if int(business.owner_id) == int(session['id']):
             Business.query.filter_by(id=business_id).delete()
             db.session.commit()
             print(f'Business {business_id} deleted!')
