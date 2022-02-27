@@ -2,45 +2,56 @@
 
 {% block content %}
 
-<div class="columns is-centered">
-
-    <div class="column is-10 mt-4">
-        <div class="box">
-            <center>
-                <figure class="image" style="width:60%;height:auto;">
-                    <img src={{ url_for('display_image', filename=business.image) }}>
-                </figure>
-            </center>
-        </div>  
-        
-            <div class="content">
-                <h2 class="title is-2 mt-3 mb-5">{{ business.name }}</h2>
-                <h3>
-                    <a href={{ business.url }}>link</a>
-                </h3>
-                <h5 class="subtitle is-5 mb-2" style="font-weight:400;"> {{ business.industry[0]|upper }}{{ business.industry[1:] }} Industry • {{ business.size }} Employees</h5>
-                <weak>Owned by: {{ owner.first_name }} {{ owner.last_name }}</weak>
-                <br><br>
-                {% if user.account_type == "investor" %}
-                    <div class="control mb-4">
-                        <button class="button modal-button px-5 is-link" data-target="modal-invest">Invest Now</button>
-                    </div>
-                {% elif user.account_type == "owner" %}
-                    <div class="columns is-mobile is-centered is-vcentered mb-4">
-                        <div class="column is-narrow">
-                            <a class="button px-5 is-link" href={{ "/edit/" ~ business.id }}>Edit Business</a>
-                        </div>
-                        <div class="column">
-                            <button class="button modal-button px-3 is-text" data-target="modal-delete">Delete Business</button>
-                        </div>
-                    </div>
-                {% endif %}
-                <p>{{ business.description }}</p><br>
+<div class="columns">
+    <!-- left hand side column -->
+    <div class="column is-left is-one-fifth ml-5">
+        <figure class="image" style="width:auto;height:auto;">
+            <img src={{ url_for('display_image', filename=business.image) }}>
+        </figure>
+        <div class="content">
+            <div class="title is-5 mt-5">
+                <h2>{{ business.name }} ☑️</h2>
             </div>
+            <div class="subtitle">
+                <h4>
+                    <a href={{ business.url }}>Website</a>
+                </h4>
+            </div>
+            <div>
+                <h5 class="subtitle" style="font-weight:400;"> {{ business.industry[0]|upper }}{{ business.industry[1:] }} Industry • {{ business.size }} Employees</h5>
+            </div>
+                {% if user.account_type == "investor" %}
+                <div class="control mb-4">
+                    <button class="button modal-button px-5 is-link" data-target="modal-invest">Invest Now</button>
+                </div>
+                {% elif user.account_type == "owner" %}
+                <div class="my-3">
+                    <a class="button is-link" href={{ "/edit/" ~ business.id }}>Edit Business</a>
+                </div>
+                <div class="my-3">
+                    <button class="button modal-button is-link is-danger" data-target="modal-delete">Delete Business</button>
+                </div>
+                {% endif %}
 
         </div>
     </div>
+    
+    <!-- middle column -->
+    <div class="column is-three-fifths">
+        <figure class="image">
+            <img src="../static/stock/bunger.jpg">
+        </figure>
+        <div class="box">
+            <weak>Owned by: {{ owner.first_name }} {{ owner.last_name }}</weak>
+            <br><br>
+
+            <p>{{ business.description }}</p><br>
+        </div>
+    </div>
+
+    <!-- far left column -->
 </div>
+
 
 <div id="modal-delete" class="modal">
     <div class="modal-background"></div>
