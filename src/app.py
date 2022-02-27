@@ -27,7 +27,6 @@ with app.app_context():
     db.create_all()
     add_data(db)
         
-    
 
 
 # Redirect lost souls
@@ -175,6 +174,11 @@ def create():
             industry = request.form['industry'].strip()
             employees = request.form['employees'].strip()
             url = request.form['url'].strip()
+            twitter = request.form['twitter'].strip()
+
+            # Filter out the '@'    
+            if twitter[0] == '@':
+                twitter = twitter[1:]
 
             # File uploading
             if 'file' not in request.files:
@@ -194,7 +198,8 @@ def create():
                 size=employees,
                 url=url,
                 owner=user,
-                image=filename
+                image=filename,
+                twitter=twitter
             )
 
             db.session.add(business)
@@ -271,6 +276,11 @@ def edit(business_id):
                 business.industry = request.form.get('industry')
                 business.size = int(request.form['employees'].strip())
                 business.url = request.form['url'].strip()
+                twitter = request.form['twitter'].strip()
+
+                if twitter[0] == '@':
+                    twitter = twitter[1:]
+                business.twitter = twitter                
 
                 # File uploading
                 if 'file' in request.files:
