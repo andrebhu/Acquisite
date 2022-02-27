@@ -2,6 +2,14 @@
 
 {% block content %}
 
+<head>
+    <style>
+        .gradient{
+            background: linear-gradient(to left, #67d9ff 0%, #a5f4ff 100%);
+        }
+    </style>
+</head>
+
 <div class="columns">
     <!-- left hand side column -->
     <div class="column is-left is-one-fifth ml-5">
@@ -38,14 +46,22 @@
     
     <!-- middle column -->
     <div class="column is-three-fifths">
-        <figure class="image">
+        <!-- <figure class="image">
             <img src="../static/stock/bunger.jpg">
-        </figure>
+        </figure> -->
+        <div class="box gradient">
+            <h1>
+                
+            </h1>
+        </div>
         <div class="box">
             <weak>Owned by: {{ owner.first_name }} {{ owner.last_name }}</weak>
             <br><br>
 
             <p>{{ business.description }}</p><br>
+        </div>
+        <div class="box">
+            <a class="twitter-timeline" href="https://twitter.com/{{ business.twitter }}">Tweets by {{ business.name }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
         </div>
     </div>
 
