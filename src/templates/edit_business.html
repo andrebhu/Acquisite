@@ -1,11 +1,68 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="column is-6-desktop is-10-tablet">
     <div class="box">
-        <form method="post">
-            <input type="text" name="name" value={{ business.name }} required>
-            <input type="text" name="description" value={{ business.description }} required>
-            <input type="submit">
+        <h2 class="title is-2 has-text-centered">Edit Company Profile</h2> 
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="field mt-3">
+                <div class="control">
+                    <label class="label">Company Name</label>
+                    <input type="text" class="input is-medium" name="name" value={{ business.name }} required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label class="label">Company Description</label>
+                    <textarea class="textarea is-medium" name="description" value={{ business.description }} required></textarea>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Company Image</label>
+                <div class="file has-name is-fullwidth">
+                    <label class="file-label">
+                      <input class="file-input" type="file" name="resume">
+                      <span class="file-cta">
+                        <span class="file-icon">
+                          <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                          Choose a file…
+                        </span>
+                      </span>
+                      <span class="file-name">
+                        {{ business.image }}
+                      </span>
+                    </label>
+                  </div>
+            </div>
+
+            <div class="control">
+                <button class="button is-medium is-fullwidth is-link" type="submit">Submit</button>
+            </div>
+
         </form>
     </div>
+</div>
 {% endblock %}
+
+<!-- <div class="field">
+    <label class="label">Company Image</label>
+    <div class="file mb-3">
+        
+        <label class="file-label">
+            <input class="file-input" type="file" name="file" required>
+            <span class="file-cta">
+            <span class="file-icon">
+                <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+                Choose a file…
+            </span>
+            </span>
+        </label>
+    </div>
+</div> -->

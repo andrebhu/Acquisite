@@ -10,10 +10,22 @@
             <div class="content">
                 <h2 class="title is-2 mt-3 mb-5">{{ business.name }}</h2>
                 <h5 class="subtitle is-5" style="font-weight:400;">Owned by: {{ owner.first_name }} {{ owner.last_name }}</h5>
-                
+                {% if user.account_type == "investor" %}
+                    <div class="control mb-4">
+                        <button class="button px-5 is-link">Invest Now</button>
+                    </div>
+                {% elif user.account_type == "owner" %}
+                    <div class="level">
+                        <div class="control mb-4">
+                            <a class="button px-5 is-link" href={{ "/edit/" ~ business.id }}>Edit Business</a>
+                        </div>
+                        <div class="control mb-4">
+                            <a class="button is-text" href={{ "/delete/" ~ business.id }}>Delete Business</a>
+                        </div>
+                    </div>
+                {% endif %}
                 <p>{{ business.description }}</p><br>
             </div>
-            
 
         </div>
     </div>
