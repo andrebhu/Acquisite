@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Acquisite</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <script src="https://kit.fontawesome.com/46826c2520.js" crossorigin="anonymous"></script>
   </head>
@@ -18,11 +19,11 @@
       <div class="navbar-brand ">
         {% if user %}
         <a class="navbar-item" href="/home">
-          <img src="{{ url_for('static', filename='logo.png') }}" width="95" height="31">
+          <img src="{{ url_for('static', filename='logo.png') }}">
         </a>
         {% else %}
         <a class="navbar-item" href="/index">
-          <img src="{{ url_for('static', filename='logo.png') }}" width="95" height="31">
+          <img src="{{ url_for('static', filename='logo.png') }}">
         </a>
         {% endif %}
       </div>
@@ -34,13 +35,13 @@
               {% if user %}
               <a class="button is-text mr-4" href={{ url_for('profile') }} style="background-color:#2D3A57;color:white;">Account</a>
                 {% if user.account_type == "investor" %}
-                <a class="button is-link is-outlined" href={{ url_for('logout') }}>Logout</a>
+                <a class="button is-text mr-4" href={{ url_for('create') }} style="background-color:#2D3A57;color:white;">Investments</a>
                 {% elif user.account_type == "owner" %}
                 <a class="button is-text mr-4" href={{ url_for('create') }} style="background-color:#2D3A57;color:white;">Create Business</a>
-                <a class="button is-outlined" href={{ url_for('logout') }}>Logout</a>
-                {% endif %}         
+                {% endif %}     
+              <a class="button is-white is-outlined mr-4" href={{ url_for('logout') }}>Logout</a>    
               {% else %}
-              <a class="button is-link is-outlined" href="/login">Login</a>
+              <a class="button is-link is-outlined mr-4" href="/login">Login</a>
               {% endif %}            
             </div>
           </div>
