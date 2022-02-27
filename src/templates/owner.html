@@ -31,7 +31,7 @@
                         <div class="media-content">
                             <p>
                                 <strong>{{ b.name }}</strong><br>
-                                {{ user.first_name }} {{user.last_name }}
+                                {{ b.industry[0]|upper }}{{ b.industry[1:] }} Industry • {{ b.size }} Employees
                             </p>
                         </div>
                     </div>

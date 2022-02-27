@@ -69,6 +69,8 @@ with app.app_context():
         description=
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         ,
+        industry='food',
+        size=25,
         owner=User.query.get(3),
         image='mcdonalds.png'
     )
@@ -76,12 +78,16 @@ with app.app_context():
     business2 = Business(
         name='Wendys',
         description='lorem',
+        industry='food',
+        size=25,
         owner=User.query.get(2),
         image='wendys.png'
     )
     business3 = Business(
         name='Taco Bell',
         description='We sell tacos',
+        industry='food',
+        size=25,
         owner=User.query.get(4),
         image='five_guys.png'
     )
@@ -234,6 +240,8 @@ def create():
         if request.method == 'POST':
             name = request.form['name'].strip()
             description = request.form['description'].strip()
+            industry = request.form['industry'].strip()
+            employees = request.form['employees'].strip()
 
             # File uploading
             if 'file' not in request.files:
@@ -249,9 +257,12 @@ def create():
             business = Business(
                 name=name,
                 description=description,
+                industry=industry,
+                size=employees,
                 owner=user,
                 image=filename
             )
+
             db.session.add(business)
             db.session.commit()
 
@@ -327,6 +338,8 @@ def edit(business_id):
 
                 business.name = request.form['name'].strip()
                 business.description = request.form['description'].strip()
+                business.industry = request.form['industry'].strip()
+                business.size = request.form['employees'].strip()
                 
                 db.session.commit()
             except:

@@ -13,6 +13,8 @@
                         <tr>
                             <th></th>
                             <th>Company Name</th>
+                            <th>Industry</th>
+                            <th>Employee Size</th>
                             <th>Owners</th>
                         </tr>
                     </thead>
@@ -21,6 +23,8 @@
                             <tr>
                                 <th>{{ loop.index }}</th>
                                 <th><a href="/business/{{ b.id | safe }}"><u>{{ b.name }}</u></a></th>
+                                <td>{{ b.industry[0]|upper }}{{ b.industry[1:] }}</td>
+                                <td>{{ b.size }}</td>
                                 <td>{{ b.owner.first_name }} {{b.owner.last_name }}</td>
                             </tr>
                         {% endfor %}  

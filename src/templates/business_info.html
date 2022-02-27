@@ -15,7 +15,9 @@
         
             <div class="content">
                 <h2 class="title is-2 mt-3 mb-5">{{ business.name }}</h2>
-                <h5 class="subtitle is-5" style="font-weight:400;">Owned by: {{ owner.first_name }} {{ owner.last_name }}</h5>
+                <h5 class="subtitle is-5 mb-2" style="font-weight:400;"> {{ business.industry[0]|upper }}{{ business.industry[1:] }} Industry • {{ business.size }} Employees</h5>
+                <weak>Owned by: {{ owner.first_name }} {{ owner.last_name }}</weak>
+                <br><br>
                 {% if user.account_type == "investor" %}
                     <div class="control mb-4">
                         <button class="button modal-button px-5 is-link" data-target="modal-invest">Invest Now</button>
@@ -65,7 +67,9 @@
         </header>
         <section class="modal-card-body">
             <h5 class="title is-5">Company: {{ business.name }}</h5>
-            <h6 class="subtitle is-6">Owner: {{ owner.first_name }} {{owner.last_name }}</h6>
+            <h6 class="subtitle is-6 mb-2">Owner: {{ owner.first_name }} {{owner.last_name }}</h6>
+            <weak><u><a href = "mailto: {{ owner.email }}">Contact Info</a></u></weak>
+            <br><br>
             <p>
                 You are about to send a request to invest in {{ business.name }}.
                 Please know that all deals and negotiations will take place outside of
