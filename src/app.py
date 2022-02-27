@@ -180,6 +180,8 @@ def register():
         return render_template('register.html')
 
 
+
+
 # Home page for users
 @app.route('/home')
 def home():
@@ -273,7 +275,21 @@ def profile():
                 user.first_name = request.form['first_name'].strip()
                 user.last_name = request.form['last_name'].strip()
                 user.email = request.form['email'].strip()
-                user.password = request.form['password'].strip()            
+                user.password = request.form['password'].strip()    
+
+                 # File uploading
+                if 'file' in request.files:
+                    file = request.files['file']
+                    filename = ''
+                    if file:
+                        filename = file.filename
+                        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+                        user.avatar = filename
+
+
+
+
                 db.session.commit()
 
                 return redirect(url_for('home'))       
