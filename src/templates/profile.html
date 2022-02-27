@@ -18,9 +18,15 @@
                 </p>
             </div>
             <div class="subtitle">
+                {% if user.account_type == "investor" %}
                 <p>
                     Business Investor
                 </p>
+                {% else %}
+                <p>
+                    Business Owner
+                </p>
+                {% endif %}
             </div>
         </div>
 
