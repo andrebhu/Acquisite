@@ -41,6 +41,7 @@ class Business(db.Model):
 
     image = db.Column(db.String(128), nullable=False)
     url = db.Column(db.String(128), default="")
+    twitter = db.Column(db.String(128))
 
     # Additional features in the future
     # posts
@@ -83,17 +84,27 @@ def add_data(db):
         password='password',
         account_type='owner'
     )
+    owner4 = User(
+        first_name='David',
+        last_name='Chang',
+        email='david@test.com',
+        password='password',
+        account_type='owner'
+    )
+
+
     db.session.add(investor)
     db.session.add(owner)
     db.session.add(owner2)
     db.session.add(owner3)
+    db.session.add(owner4)
     db.session.commit()
 
     
     business = Business(
         name='McDonalds',
         description=
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+        'buhbuhbuh...buhbuh!'
         ,
         industry='food',
         size=25,
@@ -110,13 +121,23 @@ def add_data(db):
         image='wendys.png',
         url='https://www.wendys.com'
     )
+    
     business3 = Business(
-        name='Taco Bell',
-        description='We sell tacos',
+        name='Baco Tell',
+        description='Exclusively holds baja blast',
         industry='food',
         size=25,
         owner=User.query.get(4),
         image='five_guys.png'
+    )
+
+    business4 = Business(
+        name='Twithc',
+        description='asmr?',
+        industry='idk',
+        size=100,
+        owner=User.query.get(5),
+        image='twitch.png'
     )
     db.session.add(business)
     db.session.add(business2)

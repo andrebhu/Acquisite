@@ -33,16 +33,14 @@
             <div class="buttons">
   
               {% if user %}
-              <a class="button is-text mr-4" href={{ url_for('profile') }} style="background-color:#2D3A57;color:white;">Account</a>
-                {% if user.account_type == "investor" %}
-                <a class="button is-text mr-4" href={{ url_for('create') }} style="background-color:#2D3A57;color:white;">Investments</a>
-                {% elif user.account_type == "owner" %}
+              <a class="button is-text mr-4" href={{ url_for('profile') }} style="background-color:#2D3A57;color:white;">Profile</a>
+              {% if user.account_type == "owner" %}
                 <a class="button is-text mr-4" href={{ url_for('create') }} style="background-color:#2D3A57;color:white;">Create Business</a>
-                {% endif %}     
+              {% endif %}     
               <a class="button is-white is-outlined mr-4" href={{ url_for('logout') }}>Logout</a>    
               {% else %}
               <a class="button is-link is-outlined mr-4" href="/login">Login</a>
-              {% endif %}            
+              {% endif %}
             </div>
           </div>
       </div>
