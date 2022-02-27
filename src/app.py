@@ -203,7 +203,8 @@ def home():
 # View business information
 @app.route('/business/<int:business_id>')
 def business(business_id):
-    try:             
+    try:
+        user = User.query.get(session['id'])
         business = Business.query.get(business_id)
         owner = User.query.get(business.owner_id)
         

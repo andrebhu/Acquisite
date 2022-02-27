@@ -3,17 +3,39 @@
 {% block content %}
     <div class="column is-centered">
         <div class="box">
-            Welcome, {{ user.first_name }} <br>
-            
-            Investor <br>
+            <h4 class="title is-4 mb-5">Welcome, {{ user.first_name }}</h4>
+            <h4 class="subtitle is-4">All businesses: </h4>
 
-            All businesses:
-            {% for b in businesses %}
             <div class="box">
-                <a href="/business/{{ b.id | safe }}">{{ b.name }}</a>
-                Owned by: <strong> {{ b.owner.first_name }} {{b.owner.last_name }}</strong>
-            </div>                
-            {% endfor %}            
+                <center><h5 class="title is-5">[Investor Dashboard]</h5></center>
+                <table class="table is-hoverable is-striped is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Company Name</th>
+                            <th>Owners</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for b in businesses %}
+                            <tr>
+                                <th>{{ loop.index }}</th>
+                                <th><a href="/business/{{ b.id | safe }}"><u>{{ b.name }}</u></a></th>
+                                <td>{{ b.owner.first_name }} {{b.owner.last_name }}</td>
+                            </tr>
+                        {% endfor %}  
+                    </tbody>
+                </table>
+            </div>          
         </div>
     </div>
 {% endblock %}
+
+<!-- 
+{% for b in businesses %}
+    <div class="box">
+        
+        <a href="/business/{{ b.id | safe }}">{{ b.name }}</a>
+        Owned by: <strong> {{ b.owner.first_name }} {{b.owner.last_name }}</strong>
+    </div>                
+{% endfor %}   -->

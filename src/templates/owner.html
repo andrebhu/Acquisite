@@ -1,15 +1,41 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <style>
+        .item {
+            -webkit-filter: brightness(100%);
+        }
+        .item:hover {
+            -webkit-filter: brightness(90%);
+            -webkit-transition: all .2s ease;
+            -moz-transition: all .2s ease;
+            -o-transition: all .2s ease;
+            -ms-transition: all .2s ease;
+            transition: all .2s ease;
+        }
+    </style>
     <div class="column is-centered">
         <div class="box">
             <h4 class="title is-4 mb-5">Welcome, {{ user.first_name }}</h4>
             
             <h4 class="subtitle is-4">Currently Owned Businesses: </h4>
             {% for b in user.businesses %}
-                <div class="box">
-                    <a href="/business/{{ b.id | safe }}">{{ b.name }}</a>
+            <a href="/business/{{ b.id | safe }}">
+                <div class="box item">
+                    <div class="columns is-vcentered">
+                        <div class="column is-2" style="align-items: center;">
+                            <figure class="image is-128x128">
+                                <img src={{ url_for('display_image', filename=b.image) }}>
+                            </figure>
+                        </div>
+                        <div class="column">
+                            <label class="subtitle">{{ b.name }}</label><br>
+                            <span>{{ user.first_name }} {{user.last_name }}</span>
+                        </div>
+                    </div>
                 </div>
+            </a>
+                
             {% endfor %}
             
         </div>
