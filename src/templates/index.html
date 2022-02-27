@@ -6,9 +6,10 @@
 <meta http-equiv="Refresh" content="0; url='/home'" />
 {% endif %}
 
+<!-- banner section -->
 <section class="hero">
-    <div class="hero-body" style="background-color: #9fbdff">
-        <h1 class="title" style="color:#ffffff">
+    <div class="hero-body" style="background-color: #b5cbfc">
+        <h1 class="title ml-6" style="color:#ffffff">
             <i>
                 Invest with confidence.
             </i>
@@ -16,31 +17,36 @@
     </div>
 </section>
 
-
+<!-- top part -->
 <div class="columns is-centered">
     <div class="column is-10">
-        <div class="columns is-left mt-6 is-4" style="background-color:#9fbdff; border-radius: 15px;">
-            <div class="column is-5 is-3-desktop my-6 ml-6">
+        <div class="columns is-left mt-6 is-4 is-vcentered" style="background-color:#b5cbfc; border-radius: 15px;">
+            <div class="column is-one-third my-6 ml-6 ">
                 <div class="box">
                     <div class="block">
-                        <h2 class="title is-2">Connect with local businesses</h2>
+                        <h2 class="title is-right is-2 mr-3">Connect with local businesses</h2>
                     </div>
                     <div class="block">
-                        <h5 class="subtitle is-5 mt-2 mb-5">Manage and invest in a local business</h5>
+                        <h5 class="subtitle is-5 mt-2 mb-5 mr-3">Manage and invest in a local business</h5>
                     </div>
                     <div class="block mt-6">
-                        <a class="button is-fullwidth is-link " style="background-color:#82a9ff" href="/register">Sign Up to Invest</a>
+                        <a class="button is-fullwidth is-link " style="background-color:#94b6ff" href="/register">Sign Up to Invest</a>
                     </div>
-                </div>         
-                       
+                </div>             
             </div>
-                
+            <div class="column is-left">
+                <figure class="image my-5 mr-3 is-3by2 ">
+                    <img class="is-rounded" src="../static/stock/dylan-gillis-KdeqA3aTnBY-unsplash.jpg">
+                </figure>
+            </div>
         </div>
     </div>
 </div>
+
+<!-- bottom part -->
 <div class="columns is-centered">
     <div class="column is-10">
-        <div class="columns is-left mt-6 is-4" style="background-color:#9fbdff; border-radius: 15px;">
+        <div class="columns is-left mt-6 is-4 is-vcentered" style="background-color:#b5cbfc; border-radius: 15px;">
             <div class="column is-one-third my-6 ml-6">
                 <div class="box">
                         <div class="block is-3-desktop">
@@ -50,12 +56,27 @@
                             <h5 class="subtitle is-5 mt-2 mb-5">Watch your local business grow and thrive</h5>
                         </div>
                         <div class="block mt-6">
-                            <a class="button is-fullwidth is-link " style="background-color: #9fbdff" href="/register">Create a Business Page</a>
+                            <a class="button is-fullwidth is-link " style="background-color: #94b6ff" href="/register">Create a Business Page</a>
                         </div>
                 </div>                
+            </div>
+            <div class="column is-right">
+                <figure class="image my-5 mr-3 is-right">
+                    <img class="is-rounded" src="../static/stock/resize_clothing.jpg">
+                </figure>
             </div>
         </div>
     </div>
 </div>
+
+
+<!-- footer -->
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+            Written with <b>Bulma</b>. Powered by <b>Flask</b>.
+        </p>
+    </div>
+</footer>
 
 {% endblock %}
