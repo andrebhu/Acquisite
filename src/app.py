@@ -81,7 +81,8 @@ with app.app_context():
         industry='food',
         size=25,
         owner=User.query.get(2),
-        image='wendys.png'
+        image='wendys.png',
+        url='https://www.wendys.com'
     )
     business3 = Business(
         name='Taco Bell',
@@ -344,7 +345,14 @@ def edit(business_id):
                 db.session.commit()
             except:
                 print('edit_business.html form invalid')
-        return render_template('edit_business.html')
+
+        try:
+            business = Business.query.get(business_id)
+            return render_template('edit_business.html', **locals())
+        except Exception as e:
+            print(e)
+            flash('An error occured', 'danger')
+            return redirect('/')
     except Exception as e:
         print(e)
         flash('An error occured', 'danger')

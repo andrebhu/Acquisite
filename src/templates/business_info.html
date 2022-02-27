@@ -15,6 +15,9 @@
         
             <div class="content">
                 <h2 class="title is-2 mt-3 mb-5">{{ business.name }}</h2>
+                <h3>
+                    <a href={{ business.url }}>link</a>
+                </h3>
                 <h5 class="subtitle is-5 mb-2" style="font-weight:400;"> {{ business.industry[0]|upper }}{{ business.industry[1:] }} Industry • {{ business.size }} Employees</h5>
                 <weak>Owned by: {{ owner.first_name }} {{ owner.last_name }}</weak>
                 <br><br>

@@ -40,6 +40,8 @@ class Business(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     image = db.Column(db.String(128), nullable=False)
+    url = db.Column(db.String(128), default="")
+
     # Additional features in the future
     # posts
     # location = db.Column(db.String(128), nullable=False)
