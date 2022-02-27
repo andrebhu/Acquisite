@@ -14,7 +14,7 @@
     {% if user %}    
     <nav class="level" role="navigation"  aria-label="main navigation" style="background-color:#2D3A57;">
     {% else %}
-    <nav class="level is-white" role="navigation"  aria-label="main navigation">
+    <nav class="level is-white mt-2 ml-1" role="navigation"  aria-label="main navigation">
     {% endif %}  
       <div class="navbar-brand ">
         {% if user %}
@@ -31,15 +31,14 @@
       <div class="level-right">
           <div class="level-item">
             <div class="buttons">
-  
               {% if user %}
               <a class="button is-text mr-4" href={{ url_for('profile') }} style="background-color:#2D3A57;color:white;">Profile</a>
-              {% if user.account_type == "owner" %}
-                <a class="button is-text mr-4" href={{ url_for('create') }} style="background-color:#2D3A57;color:white;">Create Business</a>
-              {% endif %}     
+                {% if user.account_type == "owner" %}
+                  <a class="button is-text mr-4" href={{ url_for('create') }} style="background-color:#2D3A57;color:white;">Create Business</a>
+                {% endif %}     
               <a class="button is-white is-outlined mr-4" href={{ url_for('logout') }}>Logout</a>    
               {% else %}
-              <a class="button is-link is-outlined mr-4" href="/login">Login</a>
+              <a class="button is-link is-outlined mt-2 mr-4" href="/login">Login</a>
               {% endif %}
             </div>
           </div>

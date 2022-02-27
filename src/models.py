@@ -119,7 +119,8 @@ def add_data(db):
         size=25,
         owner=User.query.get(2),
         image='wendys.png',
-        url='https://www.wendys.com'
+        url='https://www.wendys.com',
+        twitter='Wendys'
     )
     
     business3 = Business(
@@ -128,7 +129,8 @@ def add_data(db):
         industry='food',
         size=25,
         owner=User.query.get(4),
-        image='five_guys.png'
+        image='five_guys.png',
+        twitter='FiveGuys'
     )
 
     business4 = Business(
@@ -137,7 +139,8 @@ def add_data(db):
         industry='idk',
         size=100,
         owner=User.query.get(5),
-        image='twitch.png'
+        image='twitch.png',
+        twitter='Twitch'
     )
     db.session.add(business)
     db.session.add(business2)

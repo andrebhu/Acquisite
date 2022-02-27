@@ -6,10 +6,24 @@
 <meta http-equiv="Refresh" content="0; url='/home'" />
 {% endif %}
 
+<head>
+    <style>
+        .gradient{
+            background: linear-gradient(to left, #b5cbfc 0%, #86abfa 100%);
+        }
+        .gradient2{
+            background: linear-gradient(to right, #b5cbfc 0%, #86abfa 100%);
+        }
+        .gradient3{
+            background: linear-gradient(to bottom, #ffffff 0%, #dadada 100%);
+        }
+    </style>
+</head>
+
 <!-- banner section -->
 <section class="hero">
-    <div class="hero-body" style="background-color: #b5cbfc">
-        <h1 class="title ml-6" style="color:#ffffff">
+    <div class="hero-body gradient" >
+        <h1 class="title ml-5" style="color:#ffffff">
             Invest with confidence.
         </h1>
     </div>
@@ -18,7 +32,7 @@
 <!-- top part -->
 <div class="columns is-centered">
     <div class="column is-10">
-        <div class="columns is-left mt-6 is-4 is-vcentered" style="background-color:#b5cbfc; border-radius: 15px;">
+        <div class="columns is-left mt-6 is-4 is-vcentered gradient2" style="border-radius: 15px;">
             <div class="column is-one-third my-6 ml-6 ">
                 <div class="box">
                     <div class="block">
@@ -44,14 +58,15 @@
 <!-- bottom part -->
 <div class="columns is-centered">
     <div class="column is-10">
-        <div class="columns is-left mt-6 is-4 is-vcentered" style="background-color:#b5cbfc; border-radius: 15px;">
+        <div class="columns is-left my-6 is-4 is-vcentered gradient2"; border-radius: 15px;">
             <div class="column is-one-third my-6 ml-6">
                 <div class="box">
                         <div class="block is-3-desktop">
                             <h2 class="title is-2">Exchange your local business</h2>
                         </div>
                         <div class="block">
-                            <h5 class="subtitle is-5 mt-2 mb-5">Watch your local business grow and thrive</h5>
+                            <h5 class="subtitle is-5 mt-2 mb-5">Market your business to investors in real time.</h5>
+                            
                         </div>
                         <div class="block mt-6">
                             <a class="button is-fullwidth is-link " style="background-color: #94b6ff" href="/register">Create a Business Page</a>
@@ -70,7 +85,7 @@
 
 <!-- footer -->
 <footer class="footer">
-    <div class="content has-text-centered">
+    <div class="container has-text-centered background-color=#000000">
         <p>
             Written with <b>Bulma</b>. Powered by <b>Flask</b>.
         </p>
