@@ -1,6 +1,6 @@
 # Acquisite
 
-[acquisite.tech](http://acquisite.tech)
+[http://acquisite.tech](http://acquisite.tech)
 
 ### Account Logins
 
