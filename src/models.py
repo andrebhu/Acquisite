@@ -60,34 +60,34 @@ def add_data(db):
         email='investor@test.com',
         password='investor',
         account_type='investor',
-        avatar='pfp.jpg'
+        avatar='mark.jpeg'
     )
 
     owner = User(
         first_name='Andre',
         last_name='Hu',
-        email='andre@test.com',
+        email='andre@acquisite.tech',
         password='password',
         account_type='owner'
     )
     owner2 = User(
         first_name='Nick',
         last_name='Wu',
-        email='nick@test.com',
+        email='nick@acquisite.tech',
         password='password',
         account_type='owner'
     )
     owner3 = User(
         first_name='Arjun',
         last_name='Kubal',
-        email='arjun@test.com',
+        email='arjun@acquisite.tech',
         password='password',
         account_type='owner'
     )
     owner4 = User(
         first_name='David',
         last_name='Chang',
-        email='david@test.com',
+        email='david@acquisite.tech',
         password='password',
         account_type='owner'
     )
@@ -102,47 +102,38 @@ def add_data(db):
 
     
     business = Business(
-        name='McDonalds',
-        description=
-        'buhbuhbuh...buhbuh!'
-        ,
+        name='886',
+        description='Opened in 2018, Eight Eight Six is a concept by Eric Sze and Andy Chuang that aims to fuse their Taiwanese upbringing with American modernization.',
         industry='food',
-        size=25,
-        owner=User.query.get(3),
-        image='mcdonalds.png'
+        size=8,
+        owner=User.query.get(2),
+        url='https://www.eighteightsix.com',
+        image='eighteightsix.jpg'
     )
     
     business2 = Business(
-        name='Wendys',
-        description='WENDYSWENDYSWENDYSWENDYSWENDYSWENDYSWENDYSWENDYSWENDYSWENDYS',
-        industry='food',
-        size=25,
-        owner=User.query.get(2),
-        image='wendys.png',
-        url='https://www.wendys.com',
-        twitter='Wendys'
-    )
-    
-    business3 = Business(
-        name='Baco Tell',
-        description='Exclusively holds baja blast',
-        industry='food',
-        size=25,
-        owner=User.query.get(4),
-        image='five_guys.png',
-        twitter='FiveGuys'
+        name='New York University',
+        description='NYU',
+        industry='construction',
+        size=1,
+        owner=User.query.get(3),
+        image='nyu.png',
+        url='https://www.nyu.edu',
+        twitter='BarstoolNYU'
     )
 
-    business4 = Business(
-        name='Twithc',
-        description='asmr?',
-        industry='idk',
-        size=100,
+    business6 = Business(
+        name='Joe\'s Pizza',
+        description='Joe Mama',
+        industry='food',
+        size=20,
         owner=User.query.get(5),
-        image='twitch.png',
-        twitter='Twitch'
+        image='joes.jpg',
+        url='https://www.wendys.com',
+        twitter=''
     )
     db.session.add(business)
     db.session.add(business2)
     db.session.add(business3)
+    db.session.add(business4)
     db.session.commit()
