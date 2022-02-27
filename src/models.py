@@ -20,7 +20,7 @@ class User(db.Model):
     password = db.Column(db.String(128), nullable=False)
     account_type = db.Column(db.String(20), nullable=False)
 
-    avatar = db.Column(db.String(128))
+    avatar = db.Column(db.String(128), nullable=True)
 
     businesses = db.relationship('Business', backref='owner', lazy=True)
     

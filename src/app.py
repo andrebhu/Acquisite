@@ -32,7 +32,10 @@ with app.app_context():
         last_name='Cuban',
         email='investor@test.com',
         password='investor',
-        account_type='investor')
+        account_type='investor',
+        avatar='pfp.jpg'
+    )
+
     owner = User(
         first_name='Andre',
         last_name='Hu',
