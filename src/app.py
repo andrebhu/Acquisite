@@ -230,8 +230,23 @@ def create():
             name = request.form['name'].strip()
             description = request.form['description'].strip()
 
+            # File uploading
+            if 'file' not in request.files:
+                raise Exception('Missing file')
 
-            business = Business(name=name, description=description, owner=user)
+            file = request.files['file']
+            filename = ''
+            if file:
+                filename = file.filename
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            
+
+            business = Business(
+                name=name,
+                description=description,
+                owner=user,
+                image=filename
+            )
             db.session.add(business)
             db.session.commit()
 
@@ -240,7 +255,8 @@ def create():
         
         return render_template('create_business.html')
         
-    except:
+    except Exception as e:
+        print(e)
         flash('An error occured', 'danger')
         return render_template('create_business.html')
         
