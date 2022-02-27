@@ -23,6 +23,7 @@ class User(db.Model):
     avatar = db.Column(db.String(128))
 
     businesses = db.relationship('Business', backref='owner', lazy=True)
+    investments = db.relationship('Business', backref='investor', lazy=True)
     
     def __repr__(self):
         return f'User: {self.id} {self.account_type} {self.username} {self.email} {self.password}'
@@ -33,6 +34,8 @@ class Business(db.Model):
     name = db.Column(db.String(128), nullable=False)
     
     description = db.Column(db.String(128), nullable=False)
+    industry = db.Column(db.String(128), nullable=False) 
+    size = db.Column(db.Integer)
 
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
@@ -40,8 +43,6 @@ class Business(db.Model):
     # Additional features in the future
     # posts
     # location = db.Column(db.String(128), nullable=False)
-    # industry = db.Column(db.String(128), nullable=False)
-    # size = db.Column(db.Integer)
     # video link
 
 
