@@ -55,11 +55,15 @@
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
           {% for category, message in messages %}
-          <article class="message is-{{ category }}">
-            <div class="message-body">
-              {{ message }}
+          <div class="columns is-centered">
+            <div class="column is-6">
+              <article class="message is-{{ category }}">
+                <div class="message-body">
+                  {{ message }}
+                </div>
+              </article>
             </div>
-          </article>
+          </div>          
           {% endfor %}
         {% endif %}
       {% endwith %}

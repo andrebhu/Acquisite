@@ -77,7 +77,7 @@ with app.app_context():
     
     business2 = Business(
         name='Wendys',
-        description='lorem',
+        description='WENDYSWENDYSWENDYSWENDYSWENDYSWENDYSWENDYSWENDYSWENDYSWENDYS',
         industry='food',
         size=25,
         owner=User.query.get(2),
@@ -292,7 +292,7 @@ def profile():
                 user.email = request.form['email'].strip()
                 user.password = request.form['password'].strip()    
 
-                 # File uploading
+                # File uploading
                 if 'file' in request.files:
                     file = request.files['file']
                     filename = ''
@@ -301,8 +301,6 @@ def profile():
                         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
                         user.avatar = filename
-
-
 
 
                 db.session.commit()
@@ -326,7 +324,6 @@ def display_image(filename):
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
-
 # Edit business information, only for owners
 @app.route('/edit/<int:business_id>', methods=['GET', 'POST'])
 def edit(business_id):
@@ -336,23 +333,33 @@ def edit(business_id):
         if request.method == 'POST':
             try:
                 business = Business.query.get(business_id)
-
                 business.name = request.form['name'].strip()
                 business.description = request.form['description'].strip()
-                business.industry = request.form['industry'].strip()
-                business.size = request.form['employees'].strip()
+                business.industry = request.form.get('industry')
+                business.size = int(request.form['employees'].strip())
+                business.url = request.form['url'].strip()
+
+                # # File uploading
+                # if 'file' in request.files:
+                #     file = request.files['file']
+                #     filename = ''
+                #     if file:
+                #         filename = file.filename
+                #         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+                #         business.image = filename
+
                 
                 db.session.commit()
-            except:
-                print('edit_business.html form invalid')
+                print('Edit business information!')
+                return redirect(f'/business/{business_id}')
+            except Exception as e:
+                print(e)
+                flash('An error occured', 'danger')
+                
+        business = Business.query.get(business_id)
+        return render_template('edit_business.html', **locals())
 
-        try:
-            business = Business.query.get(business_id)
-            return render_template('edit_business.html', **locals())
-        except Exception as e:
-            print(e)
-            flash('An error occured', 'danger')
-            return redirect('/')
     except Exception as e:
         print(e)
         flash('An error occured', 'danger')
