@@ -12,15 +12,15 @@
                 <h5 class="subtitle is-5" style="font-weight:400;">Owned by: {{ owner.first_name }} {{ owner.last_name }}</h5>
                 {% if user.account_type == "investor" %}
                     <div class="control mb-4">
-                        <button class="button px-5 is-link">Invest Now</button>
+                        <button class="button modal-button px-5 is-link" data-target="modal-invest">Invest Now</button>
                     </div>
                 {% elif user.account_type == "owner" %}
-                    <div class="level">
-                        <div class="control mb-4">
+                    <div class="columns is-mobile is-centered is-vcentered mb-4">
+                        <div class="column is-narrow">
                             <a class="button px-5 is-link" href={{ "/edit/" ~ business.id }}>Edit Business</a>
                         </div>
-                        <div class="control mb-4">
-                            <a class="button is-text" href={{ "/delete/" ~ business.id }}>Delete Business</a>
+                        <div class="column">
+                            <button class="button modal-button px-3 is-text" data-target="modal-delete">Delete Business</button>
                         </div>
                     </div>
                 {% endif %}
@@ -30,4 +30,97 @@
         </div>
     </div>
 </div>
+
+<div id="modal-delete" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Delete Business Post</p>
+            <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <h4 class="title is-4">WARNING!</h4>
+            <p>You are about to delete your business post.</p>
+            <p>Are you sure you want to do that?</p>
+        </section>
+        <footer class="modal-card-foot">
+            <a class="button is-danger" href={{ "/delete/" ~ business.id }}>Delete</a>
+            <button class="button">Cancel</button>
+        </footer>
+    </div>
+</div>
+
+<div id="modal-invest" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Investment Request</p>
+            <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <h5 class="title is-5">Company: {{ business.name }}</h5>
+            <h6 class="subtitle is-6">Owner: {{ owner.first_name }} {{owner.last_name }}</h6>
+            <p>
+                You are about to send a request to invest in {{ business.name }}.
+                Please know that all deals and negotiations will take place outside of
+                Acquistie's platform. We will send a notification to {{ owner.first_name }}
+                and you may await for a response.
+            </p>
+            <br>
+            <p>Would you like to send an investment request?</p>
+        </section>
+        <footer class="modal-card-foot">
+            <a class="button is-link">Invest</a>
+            <button class="button">Cancel</button>
+        </footer>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Functions to open and close a modal
+    function openModal($el) {
+      $el.classList.add('is-active');
+    }
+  
+    function closeModal($el) {
+      $el.classList.remove('is-active');
+    }
+  
+    function closeAllModals() {
+      (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+        closeModal($modal);
+      });
+    }
+  
+    // Add a click event on buttons to open a specific modal
+    (document.querySelectorAll('.modal-button') || []).forEach(($trigger) => {
+      const modal = $trigger.dataset.target;
+      const $target = document.getElementById(modal);
+      console.log($target);
+  
+      $trigger.addEventListener('click', () => {
+        openModal($target);
+      });
+    });
+  
+    // Add a click event on various child elements to close the parent modal
+    (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+      const $target = $close.closest('.modal');
+  
+      $close.addEventListener('click', () => {
+        closeModal($target);
+      });
+    });
+  
+    // Add a keyboard event to close all modals
+    document.addEventListener('keydown', (event) => {
+      const e = event || window.event;
+  
+      if (e.keyCode === 27) { // Escape key
+        closeAllModals();
+      }
+    });
+  });
+</script>
 {% endblock %}
