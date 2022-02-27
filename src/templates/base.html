@@ -11,7 +11,7 @@
 
   <body>
     {% if user %}    
-    <nav class="navbar is-primary" role="navigation"  aria-label="main navigation">
+    <nav class="navbar" role="navigation"  aria-label="main navigation" style="background-color:#2D3A57;">
     {% else %}
     <nav class="navbar is-white" role="navigation"  aria-label="main navigation">
     {% endif %}  
@@ -35,12 +35,12 @@
             <div class="buttons">
   
               {% if user %}
-              <a class="is-link mr-4" href={{ url_for('profile') }}>Account</a>
+              <a class="button is-text mr-4" href={{ url_for('profile') }} style="background-color:#2D3A57;color:white;">Account</a>
                 {% if user.account_type == "investor" %}
                 <a class="button is-link is-outlined" href={{ url_for('logout') }}>Logout</a>
                 {% elif user.account_type == "owner" %}
-                <a class="is-link mr-4" href={{ url_for('create') }}>Create Business</a>
-                <a class="button is-link is-outlined" href={{ url_for('logout') }}>Logout</a>
+                <a class="button is-text mr-4" href={{ url_for('create') }} style="background-color:#2D3A57;color:white;">Create Business</a>
+                <a class="button is-outlined" href={{ url_for('logout') }}>Logout</a>
                 {% endif %}         
               {% else %}
               <a class="button is-link is-outlined" href="/login">Login</a>

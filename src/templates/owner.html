@@ -3,9 +3,9 @@
 {% block content %}
     <div class="column is-centered">
         <div class="box">
-            <h1>Welcome, {{ user.first_name }}</h1>
+            <h4 class="title is-4 mb-5">Welcome, {{ user.first_name }}</h4>
             
-            Currently owned businesses: <br>
+            <h4 class="subtitle is-4">Currently Owned Businesses: </h4>
             {% for b in user.businesses %}
                 <div class="box">
                     <a href="/business/{{ b.id | safe }}">{{ b.name }}</a>
