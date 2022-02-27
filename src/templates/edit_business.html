@@ -1,73 +1,87 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="column is-6-desktop is-10-tablet">
-    <div class="box">
-        <h2 class="title is-2 has-text-centered">Edit Company Profile</h2> 
-        <form method="post" enctype="multipart/form-data">
+<div class="columns is-centered">
+    <div class="column is-6">
+        <div class="box">
+            <h2 class="title is-2 has-text-centered">Business Profile</h2> 
+            <form method="post" enctype="multipart/form-data">
 
-            <div class="field mt-3">
-                <div class="control">
-                    <label class="label">Company Name</label>
-                    <input type="text" class="input is-medium" name="name" value={{ business.name }} required>
-                </div>
-            </div>
-
-            <div class="field">
-                <div class="control">
-                    <label class="label">Company Description</label>
-                    <textarea class="textarea is-medium" name="description" value={{ business.description }} required></textarea>
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Company Industry</label>
-                <div class="control">
-                    <div class="select">
-                        <option selected="true" disabled="disabled">Select an Industry</option>
-                        <option value="food service">Food Service</option>
-                        <option value="hospitality">Hospitality</option>
-                        <option value="construction">Construction</option>
-                        <option value="liquor store">Liquor Store</option>
-                        <option value="gas station">Gas Station</option>
-                        <option value="storage">Storage</option>
-                        <option value="repair & maintenance">Repair & Maintenance</option>
+                <div class="field mt-3">
+                    <div class="control">
+                        <label class="label">Name</label>
+                        <input type="text" class="input is-medium" name="name" value={{ business.name }} required>
                     </div>
                 </div>
-            </div>
 
-            <div class="field">
-                <div class="control">
-                    <label class="label">Employees</label>
-                    <input type="number" class="input is-medium" name="employees" placeholder="Enter Number of Employees" min="1" required>
+                <div class="field">
+                    <div class="control">
+                        <label class="label">Description</label>
+                        <textarea class="textarea is-medium" name="description" required>{{ business.description }}</textarea>
+                    </div>
                 </div>
-            </div>
 
-            <div class="field">
-                <label class="label">Company Image</label>
-                <div class="file has-name is-fullwidth">
-                    <label class="file-label">
-                      <input class="file-input" type="file" name="resume">
-                      <span class="file-cta">
-                        <span class="file-icon">
-                          <i class="fas fa-upload"></i>
+                <div class="field">
+                    <label class="label">Industry</label>
+                    <div class="control">
+                        <span class="select">
+                            <select>
+                                <option selected="true" disabled="disabled">Select an Industry</option>
+                                <option value="food service" name="industry">Food Service</option>
+                                <option value="hospitality" name="industry">Hospitality</option>
+                                <option value="construction" name="industry">Construction</option>
+                                <option value="liquor store" name="industry">Liquor Store</option>
+                                <option value="gas station" name="industry">Gas Station</option>
+                                <option value="storage" name="industry">Storage</option>
+                                <option value="repair & maintenance" name="industry">Repair & Maintenance</option>
+                            </select>
                         </span>
-                        <span class="file-label">
-                          Choose a file…
+                    </div>
+                </div>
+
+
+
+                <div class="field">
+                    <div class="control">
+                        <label class="label">Employees</label>
+                        <input type="number" value={{ business.size }} class="input is-medium" name="employees" placeholder="Enter Number of Employees" min="1" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <label class="label">URL</label>
+                        <input type="text" value={{ business.url }} class="input is-medium" name="url">
+                    </div>
+                </div>
+
+<!-- 
+                <div class="field">
+                    <label class="label">Company Image</label>
+                    <div class="file has-name is-fullwidth">
+                        <label class="file-label">
+                        <input class="file-input" type="file" name="file">
+                        <span class="file-cta">
+                            <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                            Choose a file…
+                            </span>
                         </span>
-                      </span>
-                      <span class="file-name">
-                        {{ business.image }}
-                      </span>
-                    </label>
-                  </div>
-            </div>
+                        <span class="file-name">
+                            {{ business.image }}
+                        </span>
+                        </label>
+                    </div>
+                </div> -->
 
-            <div class="control">
-                <button class="button is-medium is-fullwidth is-link" type="submit">Submit</button>
-            </div>
+                <div class="control">
+                    <button class="button is-medium is-fullwidth is-link" type="submit">Submit</button>
+                </div>
 
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}
