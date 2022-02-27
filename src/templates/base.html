@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Acquisite</title>
@@ -10,24 +11,23 @@
 
   <body>
     {% if user %}    
-      <nav class="navbar is-primary" role="navigation"  aria-label="main navigation"></nav>
+    <nav class="navbar is-primary" role="navigation"  aria-label="main navigation">
     {% else %}
-      <nav class="navbar is-white" role="navigation"  aria-label="main navigation"></nav>
+    <nav class="navbar is-white" role="navigation"  aria-label="main navigation">
     {% endif %}  
       <div class="navbar-brand ">
         {% if user %}
         <a class="navbar-item" href="/home">
-          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+          <img src="{{ url_for('static', filename='logo.png') }}" width="95" height="31">
         </a>
         {% else %}
         <a class="navbar-item" href="/index">
-          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+          <img src="{{ url_for('static', filename='logo.png') }}" width="95" height="31">
         </a>
         {% endif %}
-
       </div>
 
-      <div class="navbar-menu is-active">
+      <div class="navbar-menu is-primary" style="align-items:stretch; display:flex;flex-grow:1;">
         <div class="navbar-start">
         </div>
         <div class="navbar-end">
