@@ -324,7 +324,6 @@ def display_image(filename):
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
-
 # Edit business information, only for owners
 @app.route('/edit/<int:business_id>', methods=['GET', 'POST'])
 def edit(business_id):
@@ -336,7 +335,7 @@ def edit(business_id):
                 business = Business.query.get(business_id)
                 business.name = request.form['name'].strip()
                 business.description = request.form['description'].strip()
-                business.industry = request.form['industry'].strip()
+                business.industry = request.form.get('industry')
                 business.size = int(request.form['employees'].strip())
                 business.url = request.form['url'].strip()
 
