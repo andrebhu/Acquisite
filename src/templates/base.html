@@ -11,9 +11,9 @@
 
   <body>
     {% if user %}    
-    <nav class="navbar" role="navigation"  aria-label="main navigation" style="background-color:#2D3A57;">
+    <nav class="level" role="navigation"  aria-label="main navigation" style="background-color:#2D3A57;">
     {% else %}
-    <nav class="navbar is-white" role="navigation"  aria-label="main navigation">
+    <nav class="level is-white" role="navigation"  aria-label="main navigation">
     {% endif %}  
       <div class="navbar-brand ">
         {% if user %}
@@ -27,11 +27,8 @@
         {% endif %}
       </div>
 
-      <div class="navbar-menu is-primary" style="align-items:stretch; display:flex;flex-grow:1;">
-        <div class="navbar-start">
-        </div>
-        <div class="navbar-end">
-          <div class="navbar-item">
+      <div class="level-right" style="align-items:stretch; display:flex;flex-grow:1;">
+          <div class="level-item">
             <div class="buttons">
   
               {% if user %}
@@ -47,7 +44,6 @@
               {% endif %}            
             </div>
           </div>
-        </div>
       </div>
 
       
