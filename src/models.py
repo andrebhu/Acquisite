@@ -110,6 +110,17 @@ def add_data(db):
         url='https://www.eighteightsix.com',
         image='eighteightsix.jpg'
     )
+
+    business1 = Business(
+        name='Space Market',
+        description='Convenience at its finest.',
+        industry='liquor store',
+        size=1,
+        owner=User.query.get(3),
+        image='nyu.png',
+        url='https://www.yelp.com/biz/space-market-new-york',
+        twitter=''
+    )
     
     business2 = Business(
         name='New York University',
@@ -122,7 +133,7 @@ def add_data(db):
         twitter='BarstoolNYU'
     )
 
-    business6 = Business(
+    business3 = Business(
         name='Joe\'s Pizza',
         description='Joe Mama',
         industry='food',
@@ -133,7 +144,7 @@ def add_data(db):
         twitter=''
     )
     db.session.add(business)
+    db.session.add(business1)
     db.session.add(business2)
     db.session.add(business3)
-    db.session.add(business4)
     db.session.commit()
